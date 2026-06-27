@@ -28,3 +28,19 @@ def test_validar_retorna_resultados_corretos(client):
         json={"cpf": "111.444.777-35", "email": "aluno@ufopa.edu.br"},
     )
     assert resposta.get_json() == {"cpf_valido": True, "email_valido": True}
+
+
+def test_validar_retorna_resultados_corretos(client):
+    resposta = client.post(
+        "/validar",
+        json={
+            "cpf": "111.444.777-35",
+            "email": "aluno@ufopa.edu.br",
+            "telefone": "(11) 91234-5678",
+        },
+    )
+    assert resposta.get_json() == {
+        "cpf_valido": True,
+        "email_valido": True,
+        "telefone_valido": True,
+    }
